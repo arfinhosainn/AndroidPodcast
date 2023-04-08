@@ -6,11 +6,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.androidpodcast.R
@@ -21,7 +19,8 @@ fun HomeScreen(
     onSearchBarClicked: () -> Unit,
     drawerState: DrawerState,
     onSignOutClicked: () -> Unit,
-    onDeleteAllClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit,
+    homeScreenState: HomeScreenState
 ) {
     var padding by remember {
         mutableStateOf(PaddingValues())
@@ -32,20 +31,21 @@ fun HomeScreen(
         onSignOutClicked = onSignOutClicked,
         onDeleteAllClicked = onDeleteAllClicked
     ) {
-        Scaffold(topBar = {
-            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
-                HomeTopBar(
-                    onMenuClick = onMenuClick,
-                    onSearchBarClicked = onSearchBarClicked
-                )
+        Scaffold(
+            topBar = {
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                    HomeTopBar(
+                        onMenuClick = onMenuClick,
+                        onSearchBarClicked = onSearchBarClicked
+                    )
+                }
+            },
+            content = {
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                    padding = it
+                    NewPodcast(paddingValues = it, podcast = homeScreenState)
+                }
             }
-
-        }, content = {
-            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
-                padding = it
-                NewPodcast(paddingValues = it)
-            }
-        }
         )
     }
 }
@@ -76,7 +76,7 @@ internal fun NavigationDrawer(
                                     Row(modifier = Modifier.padding(horizontal = 12.dp)) {
                                         Image(
                                             painter = painterResource(id = R.drawable.logo),
-                                            contentDescription = "Google Logo",
+                                            contentDescription = "Google Logo"
                                         )
                                         Spacer(modifier = Modifier.width(12.dp))
                                         Text(
@@ -108,25 +108,21 @@ internal fun NavigationDrawer(
                             )
                         }
                     )
-
                 }
             },
             content = content
         )
-
     }
 }
 
-
-@Preview
-@Composable
-fun PreviewHomeScreen() {
-    HomeScreen(
-        onMenuClick = { /*TODO*/ },
-        onSearchBarClicked = { /*TODO*/ },
-        drawerState = DrawerState(DrawerValue.Open),
-        onSignOutClicked = { /*TODO*/ }) {
-
-    }
-
-}
+// @Preview
+// @Composable
+// fun PreviewHomeScreen() {
+//    HomeScreen(
+//        onMenuClick = { /*TODO*/ },
+//        onSearchBarClicked = { /*TODO*/ },
+//        drawerState = DrawerState(DrawerValue.Open),
+//        onSignOutClicked = { /*TODO*/ }
+//    ) {
+//    }
+// }

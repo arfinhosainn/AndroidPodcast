@@ -17,29 +17,29 @@ fun HomeTopBar(
     onMenuClick: () -> Unit,
     onSearchBarClicked: () -> Unit
 ) {
-
-    TopAppBar(title = {
-        Image(
-            imageVector = ImageVector.vectorResource(id = R.drawable.logo),
-            contentDescription = "logo"
-        )
-    }, actions = {
-        IconButton(onClick = onSearchBarClicked) {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon",
-                tint = MaterialTheme.colorScheme.onSurface
+    TopAppBar(
+        title = {
+            Image(
+                imageVector = ImageVector.vectorResource(id = R.drawable.logo),
+                contentDescription = "logo"
             )
-
+        },
+        actions = {
+            IconButton(onClick = onSearchBarClicked) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search Icon",
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            IconButton(onClick = onMenuClick) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu Icon",
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
-        IconButton(onClick = onMenuClick) {
-            Icon(
-                imageVector = Icons.Default.Menu,
-                contentDescription = "Menu Icon",
-                tint = MaterialTheme.colorScheme.onSurface
-            )
-        }
-    }
     )
 }
 
@@ -47,7 +47,5 @@ fun HomeTopBar(
 @Composable
 fun PreviewHomeTopBar() {
     HomeTopBar(onMenuClick = { /*TODO*/ }) {
-
     }
-
 }

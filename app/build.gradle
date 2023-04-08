@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "org.jlleitschuh.gradle.ktlint" version "11.3.1"
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -18,6 +21,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
+
     }
 
     buildTypes {
@@ -46,6 +54,20 @@ android {
     }
 }
 
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
+ktlint {
+    android = true
+    ignoreFailures = false
+    disabledRules = ["final-newline", "no-wildcard-imports"]
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+        reporter "sarif"
+    }
+
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -60,4 +82,20 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:2.44.2"
+    kapt "com.google.dagger:hilt-compiler:2.44.2"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+    // Coil
+    implementation "io.coil-kt:coil-compose:2.2.2"
+
 }
