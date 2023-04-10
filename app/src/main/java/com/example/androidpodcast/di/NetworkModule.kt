@@ -20,7 +20,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit.Builder {
-        return Retrofit.Builder().baseUrl("https://listen-api.listennotes.com/api/v2/")
+        return Retrofit.Builder().baseUrl("https://api.spreaker.com/v2/")
             .addConverterFactory(MoshiConverterFactory.create())
     }
 

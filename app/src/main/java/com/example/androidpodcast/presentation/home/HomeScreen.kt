@@ -11,7 +11,9 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.androidpodcast.R
+import com.example.androidpodcast.navigation.Screen
 
 @Composable
 fun HomeScreen(
@@ -20,7 +22,8 @@ fun HomeScreen(
     drawerState: DrawerState,
     onSignOutClicked: () -> Unit,
     onDeleteAllClicked: () -> Unit,
-    homeScreenState: HomeScreenState
+    homeScreenState: HomeScreenState,
+    navController: NavController
 ) {
     var padding by remember {
         mutableStateOf(PaddingValues())
@@ -43,7 +46,14 @@ fun HomeScreen(
             content = {
                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                     padding = it
-                    NewPodcast(paddingValues = it, podcast = homeScreenState)
+                    HomeContent(
+                        paddingValues = padding,
+                        homeState = homeScreenState,
+                        onPodcastClick = {
+                            navController.navigate(Screen.DetailScreen.route + "/${it.show_id}")
+                        }
+
+                    )
                 }
             }
         )
@@ -114,15 +124,3 @@ internal fun NavigationDrawer(
         )
     }
 }
-
-// @Preview
-// @Composable
-// fun PreviewHomeScreen() {
-//    HomeScreen(
-//        onMenuClick = { /*TODO*/ },
-//        onSearchBarClicked = { /*TODO*/ },
-//        drawerState = DrawerState(DrawerValue.Open),
-//        onSignOutClicked = { /*TODO*/ }
-//    ) {
-//    }
-// }
