@@ -1,4 +1,4 @@
-package com.example.androidpodcast.media
+package com.example.androidpodcast.exoplayer
 
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C.AUDIO_CONTENT_TYPE_MUSIC
@@ -6,19 +6,18 @@ import androidx.media3.common.C.USAGE_MEDIA
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaSession
-import com.aminovic.loula.domain.utils.common.MusicNotificationProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MusicService : MediaLibraryService() {
+class PodcastService : MediaLibraryService() {
     private var mediaLibrarySession: MediaLibrarySession? = null
 
     @Inject
-    lateinit var musicSessionCallback: MusicSessionCallback
+    lateinit var musicSessionCallback: PodcastSessionCallback
 
     @Inject
-    lateinit var musicNotificationProvider: MusicNotificationProvider
+    lateinit var musicNotificationProvider: PodcastNotificationProvider
 
     override fun onCreate() {
         super.onCreate()
