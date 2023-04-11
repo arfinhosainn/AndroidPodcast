@@ -1,55 +1,56 @@
 package com.example.androidpodcast.presentation.details
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.androidpodcast.presentation.details.components.PlayerMediaButtons
-import com.example.androidpodcast.presentation.details.components.PlayerTimeSlider
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.SimpleExoPlayer
+import androidx.media3.ui.PlayerView
 
 @Composable
 fun PodcastDetailScreen(
     viewModel: PodcastDetailsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
-    val musicState by viewModel.musicState.collectAsStateWithLifecycle()
-    val currentPosition by viewModel.currentPosition.collectAsStateWithLifecycle()
+    val episode by viewModel.detailState.collectAsState()
 
-    PlayerScreen(
-        modifier = modifier,
-        musicState = musicState,
-        currentPosition = currentPosition,
-        onSkipTo = viewModel::skipTo,
-        onMediaButtonSkipPreviousClick = viewModel::skipPrevious,
-        onMediaButtonPlayClick = viewModel::play,
-        onMediaButtonPauseClick = viewModel::pause,
-        onMediaButtonSkipNextClick = viewModel::skipNext
-    )
+    LazyColumn {
+        items(episode.episode) {
+            PodcastEpisodePlayer(playbackUrl = it.playback_url)
+        }
+    }
 }
 
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 @Composable
-private fun PlayerScreen(
-    musicState: MusicState,
-    currentPosition: Long,
-    onSkipTo: (Float) -> Unit,
-    onMediaButtonSkipPreviousClick: () -> Unit,
-    onMediaButtonPlayClick: () -> Unit,
-    onMediaButtonPauseClick: () -> Unit,
-    onMediaButtonSkipNextClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    PlayerTimeSlider(
-        currentPosition = currentPosition,
-        duration = musicState.duration,
-        onSkipTo = onSkipTo
-    )
+fun PodcastEpisodePlayer(playbackUrl: String) {
+    val contesxt = LocalContext.current
 
-    PlayerMediaButtons(
-        playWhenReady = musicState.playWhenReady,
-        onSkipPreviousClick = onMediaButtonSkipPreviousClick,
-        onPlayClick = onMediaButtonPlayClick,
-        onPauseClick = onMediaButtonPauseClick,
-        onSkipNextClick = onMediaButtonSkipNextClick
+    val exoPlayer = remember {
+        SimpleExoPlayer.Builder(contesxt).build().apply {
+            setMediaItem(MediaItem.fromUri(playbackUrl))
+            prepare()
+            playWhenReady = true
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
+
+    AndroidView(
+        factory = { context ->
+            PlayerView(context).apply {
+                player = exoPlayer
+            }
+        },
+        modifier = Modifier.fillMaxWidth()
     )
 }
