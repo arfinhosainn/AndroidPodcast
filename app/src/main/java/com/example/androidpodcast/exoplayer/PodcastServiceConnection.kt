@@ -16,14 +16,14 @@ import com.example.androidpodcast.exoplayer.mapper.asPodcast
 import com.example.androidpodcast.exoplayer.util.asPlaybackState
 import com.example.androidpodcast.exoplayer.util.orDefaultTimestamp
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.guava.await
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
 class PodcastServiceConnection @Inject constructor(
@@ -135,6 +135,3 @@ class PodcastServiceConnection @Inject constructor(
         //   setPlayingQueueIndexUseCase(player.currentMediaItemIndex)
     }
 }
-
-
-

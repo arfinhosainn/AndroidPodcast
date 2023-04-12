@@ -8,5 +8,6 @@ data class EpisodeSong(
     val playback_url: String,
     val published_at: String,
     val show_id: Int,
-    val title: String
+    val title: String,
+    val download_url: String
 )

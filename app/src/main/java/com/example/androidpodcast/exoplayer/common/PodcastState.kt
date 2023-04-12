@@ -11,7 +11,8 @@ data class PodcastState(
         image_original_url = "",
         title = "",
         image_url = "",
-        published_at = ""
+        published_at = "",
+        download_url = ""
     ),
     val playbackState: PlaybackState = PlaybackState.IDLE,
     val playWhenReady: Boolean = false,

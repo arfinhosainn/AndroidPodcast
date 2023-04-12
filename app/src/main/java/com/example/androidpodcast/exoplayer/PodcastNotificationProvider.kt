@@ -22,8 +22,8 @@ import com.example.androidpodcast.exoplayer.common.Constants.MusicNotificationId
 import com.example.androidpodcast.exoplayer.util.asArtworkBitmap
 import com.google.common.collect.ImmutableList
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlinx.coroutines.*
 
 @UnstableApi class PodcastNotificationProvider @Inject constructor(
     @Dispatcher(PodcastDispatcher.MAIN) mainDispatcher: CoroutineDispatcher,
@@ -137,7 +137,3 @@ import javax.inject.Inject
         }
     }
 }
-
-
-
-

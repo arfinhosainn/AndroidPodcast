@@ -10,15 +10,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.androidpodcast.downloader.PodcastDownloader
 
 @Composable
 fun PodcastDetailScreen(
     viewModel: PodcastDetailsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     val episode by viewModel.detailState.collectAsState()
+    val downloader = PodcastDownloader(context)
 
     Column {
         if (episode.isLoading) {
@@ -40,6 +45,13 @@ fun PodcastDetailScreen(
                 }
                 Button(onClick = { viewModel.play() }) {
                     Text(text = "Play")
+                }
+                Button(onClick = {
+                    episode.let {
+                        downloader.downloadPodcast(it.download_url)
+                    }
+                }) {
+                    Text(text = "Downlod Podcast")
                 }
             }
         }

@@ -15,11 +15,11 @@ import com.example.androidpodcast.exoplayer.common.Constants.SHUFFLE
 import com.example.androidpodcast.exoplayer.common.Constants.UNHANDLED_STATE_ERROR_MESSAGE
 import com.example.androidpodcast.exoplayer.common.Constants.UNKNOWN_CUSTOM_ACTION_ERROR_MESSAGE
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import javax.inject.Inject
 
 class PodcastActionHandler @Inject constructor(
     @Dispatcher(PodcastDispatcher.MAIN) mainDispatcher: CoroutineDispatcher,
@@ -101,5 +101,3 @@ private fun buildCustomCommand(
     .setDisplayName(displayName)
     .setIconResId(iconResource)
     .build()
-
-

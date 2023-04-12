@@ -8,8 +8,8 @@ import com.example.androidpodcast.exoplayer.PodcastServiceConnection
 import com.example.androidpodcast.exoplayer.common.Constants.DEFAULT_POSITION_MS
 import com.example.androidpodcast.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
+import kotlinx.coroutines.flow.*
 
 @HiltViewModel
 class PodcastDetailsViewModel @Inject constructor(

@@ -68,5 +68,3 @@ class PodcastSessionCallback @Inject constructor(
         musicActionHandler.cancelCoroutineScope()
     }
 }
-
-
