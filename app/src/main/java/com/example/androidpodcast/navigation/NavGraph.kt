@@ -11,10 +11,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.androidpodcast.presentation.details.PodcastDetailScreen
-import com.example.androidpodcast.presentation.details.PodcastDetailsViewModel
 import com.example.androidpodcast.presentation.home.HomeScreen
 import com.example.androidpodcast.presentation.home.HomeViewModel
+import com.example.androidpodcast.presentation.player.PodcastDetailsViewModel
+import com.example.androidpodcast.presentation.player.PodcastPlayerScreen
 
 @Composable
 fun SetupNavGraph(
@@ -49,8 +49,22 @@ fun NavGraphBuilder.homeRoute(
 fun NavGraphBuilder.detailRoute() {
     composable(route = Screen.DetailScreen.route + "/{showId}") {
         val viewModel = hiltViewModel<PodcastDetailsViewModel>()
-        val detailState by viewModel.detailState.collectAsStateWithLifecycle()
+        val currentSliderState by viewModel.currentPosition.collectAsStateWithLifecycle()
+        val podcastState by viewModel.musicState.collectAsStateWithLifecycle()
 
-        PodcastDetailScreen()
+        PodcastPlayerScreen(
+            playWhenReady = podcastState.playWhenReady,
+            trackImageUrl = podcastState.currentSong.image_original_url,
+            onMediaButtonPlayClick = {
+                viewModel.playPodcast()
+            },
+            onMediaButtonPauseClick = {
+                viewModel.resume()
+            },
+            onMediaButtonSkipNextClick = viewModel::skipNext,
+            currentPosition = currentSliderState,
+            duration = podcastState.duration,
+            onSkipTo = viewModel::skipTo
+        )
     }
 }

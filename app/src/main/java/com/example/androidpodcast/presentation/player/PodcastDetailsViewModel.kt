@@ -1,4 +1,4 @@
-package com.example.androidpodcast.presentation.details
+package com.example.androidpodcast.presentation.player
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -34,10 +34,10 @@ class PodcastDetailsViewModel @Inject constructor(
         initialValue = DEFAULT_POSITION_MS
     )
 
-    fun fkd() = musicServiceConnection.playSongs(songs = detailState.value.episode)
+    fun playPodcast() = musicServiceConnection.playSongs(songs = detailState.value.episode)
 
     fun skipPrevious() = musicServiceConnection.skipPrevious()
-    fun play() = musicServiceConnection.play()
+    fun resume() = musicServiceConnection.play()
     fun pause() = musicServiceConnection.pause()
     fun skipNext() = musicServiceConnection.skipNext()
     fun skipTo(position: Float) =

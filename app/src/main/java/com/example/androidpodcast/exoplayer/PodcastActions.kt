@@ -26,7 +26,7 @@ object PodcastActions {
         mediaSession: MediaSession,
         actionFactory: MediaNotification.ActionFactory
     ) = MusicAction(
-        iconResource = R.drawable.ic_skip_previous,
+        iconResource = R.drawable.back,
         titleResource = R.string.skip_previous,
         command = Player.COMMAND_SEEK_TO_PREVIOUS
     ).asNotificationAction(context, mediaSession, actionFactory)
@@ -47,7 +47,7 @@ object PodcastActions {
         mediaSession: MediaSession,
         actionFactory: MediaNotification.ActionFactory
     ) = MusicAction(
-        iconResource = R.drawable.ic_skip_next,
+        iconResource = R.drawable.forward,
         titleResource = R.string.skip_next,
         command = Player.COMMAND_SEEK_TO_NEXT
     ).asNotificationAction(context, mediaSession, actionFactory)

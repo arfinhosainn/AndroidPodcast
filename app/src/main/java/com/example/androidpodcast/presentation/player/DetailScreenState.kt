@@ -1,4 +1,4 @@
-package com.example.androidpodcast.presentation.details
+package com.example.androidpodcast.presentation.player
 
 import com.example.androidpodcast.domain.model.EpisodeSong
 
