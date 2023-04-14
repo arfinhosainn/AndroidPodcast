@@ -9,7 +9,7 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 internal fun Long.asFormattedString() = milliseconds.toComponents { minutes, seconds, _ ->
     stringResource(
-        id = R.string.player_time_stamp_format,
+        id = R.string.player_timestamp_format,
         String.format(locale = Locale.US, format = "%02d", minutes),
         String.format(locale = Locale.US, format = "%02d", seconds)
     )

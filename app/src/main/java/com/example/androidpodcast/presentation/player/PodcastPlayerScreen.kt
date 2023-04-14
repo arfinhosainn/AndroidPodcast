@@ -1,13 +1,16 @@
 package com.example.androidpodcast.presentation.player
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.androidpodcast.domain.model.EpisodeSong
 import com.example.androidpodcast.downloader.PodcastDownloader
 import com.example.androidpodcast.presentation.player.components.PlayerHeader
-import com.example.androidpodcast.presentation.player.components.PlayerTimeSlider
+import com.example.androidpodcast.presentation.player.components.PodcastContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -19,33 +22,38 @@ fun PodcastPlayerScreen(
     onMediaButtonSkipNextClick: () -> Unit,
     currentPosition: Long,
     duration: Long,
-    onSkipTo: (Float) -> Unit
+    onSkipTo: (Float) -> Unit,
+    onEpisodeSelected: (EpisodeSong) -> Unit,
+    episodeSong: List<EpisodeSong>
+
 ) {
     val context = LocalContext.current
+    val statre = rememberLazyListState()
 
     val downloader = PodcastDownloader(context)
 
-    BottomSheetScaffold(
-        sheetContent = {
-            PlayerTimeSlider(
-                currentPosition = currentPosition,
-                duration = duration,
-                onSkipTo = onSkipTo
-            )
-        },
-        sheetPeekHeight = 500.dp,
-        sheetContainerColor = MaterialTheme.colorScheme.onSurface
-    ) {
-        Column {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy((-20).dp), state = statre) {
+        item {
             PlayerHeader(
                 trackImageUrl = trackImageUrl,
                 playWhenReady = playWhenReady,
                 play = onMediaButtonPlayClick,
                 pause = onMediaButtonPauseClick,
                 forward10 = onMediaButtonSkipNextClick
-
             ) {
             }
+        }
+        item {
+            PodcastContent(
+                currentPosition = currentPosition,
+                duration = duration,
+                onSkipTo = onSkipTo,
+                onEpisodeSelected = {
+                    onEpisodeSelected(it)
+                },
+                episodeSong = episodeSong
+
+            )
         }
     }
 }

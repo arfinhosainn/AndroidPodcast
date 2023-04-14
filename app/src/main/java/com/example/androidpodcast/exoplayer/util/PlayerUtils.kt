@@ -20,7 +20,8 @@ fun Int.asPlaybackState() = when (this) {
     else -> error(Constants.INVALID_PLAYBACK_STATE_ERROR_MESSAGE)
 }
 
-internal fun Long.orDefaultTimestamp() = takeIf { it != C.TIME_UNSET } ?: Constants.DEFAULT_DURATION_MS
+internal fun Long.orDefaultTimestamp() = takeIf { it != C.TIME_UNSET }
+    ?: Constants.DEFAULT_DURATION_MS
 
 suspend fun Uri.asArtworkBitmap(context: Context): Bitmap? {
     val loader = ImageLoader(context)

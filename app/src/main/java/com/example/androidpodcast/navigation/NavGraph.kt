@@ -4,6 +4,7 @@ import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -51,12 +52,14 @@ fun NavGraphBuilder.detailRoute() {
         val viewModel = hiltViewModel<PodcastDetailsViewModel>()
         val currentSliderState by viewModel.currentPosition.collectAsStateWithLifecycle()
         val podcastState by viewModel.musicState.collectAsStateWithLifecycle()
+        val detailsState by viewModel.detailState.collectAsStateWithLifecycle()
+        val scope = rememberCoroutineScope()
 
         PodcastPlayerScreen(
             playWhenReady = podcastState.playWhenReady,
             trackImageUrl = podcastState.currentSong.image_original_url,
             onMediaButtonPlayClick = {
-                viewModel.playPodcast()
+//                viewModel.playPodcast()
             },
             onMediaButtonPauseClick = {
                 viewModel.resume()
@@ -64,7 +67,11 @@ fun NavGraphBuilder.detailRoute() {
             onMediaButtonSkipNextClick = viewModel::skipNext,
             currentPosition = currentSliderState,
             duration = podcastState.duration,
-            onSkipTo = viewModel::skipTo
+            onSkipTo = viewModel::skipTo,
+            onEpisodeSelected = {
+                viewModel.playPodcast(listOf(it))
+            },
+            episodeSong = detailsState.episode
         )
     }
 }
