@@ -47,9 +47,8 @@ import com.example.androidpodcast.ui.theme.lightBlue
 fun PodcastContent(
     currentPosition: Long,
     duration: Long,
-    onSkipTo: (Float) -> Unit,
-    onEpisodeSelected: (EpisodeSong) -> Unit,
-    episodeSong: List<EpisodeSong>
+    onSkipTo: (Float) -> Unit
+
 ) {
     Box(
         modifier = Modifier
@@ -82,12 +81,27 @@ fun PodcastContent(
                 modifier = Modifier.padding(start = 8.dp, end = 16.dp)
             )
             Spacer(modifier = Modifier.height(18.dp))
-            episodeSong.forEach {
-                PodcastEpisodeList(
-                    onClick = onEpisodeSelected,
-                    episodeSong = it
-                )
-            }
+        }
+    }
+}
+
+@Composable
+fun PodcastListScreen(
+    onEpisodeSelected: (EpisodeSong) -> Unit,
+    episodeSong: EpisodeSong
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+            .background(MaterialTheme.colorScheme.onSurface)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 33.dp, vertical = 45.dp)
+        ) {
+            PodcastEpisodeList(onClick = onEpisodeSelected, episodeSong = episodeSong)
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.androidpodcast.presentation.player
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import com.example.androidpodcast.domain.model.EpisodeSong
 import com.example.androidpodcast.downloader.PodcastDownloader
 import com.example.androidpodcast.presentation.player.components.PlayerHeader
 import com.example.androidpodcast.presentation.player.components.PodcastContent
+import com.example.androidpodcast.presentation.player.components.PodcastListScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +26,7 @@ fun PodcastPlayerScreen(
     duration: Long,
     onSkipTo: (Float) -> Unit,
     onEpisodeSelected: (EpisodeSong) -> Unit,
-    episodeSong: List<EpisodeSong>
+    detailScreenState: DetailScreenState
 
 ) {
     val context = LocalContext.current
@@ -47,12 +49,13 @@ fun PodcastPlayerScreen(
             PodcastContent(
                 currentPosition = currentPosition,
                 duration = duration,
-                onSkipTo = onSkipTo,
-                onEpisodeSelected = {
-                    onEpisodeSelected(it)
-                },
-                episodeSong = episodeSong
-
+                onSkipTo = onSkipTo
+            )
+        }
+        items(detailScreenState.episode) {
+            PodcastListScreen(
+                onEpisodeSelected = onEpisodeSelected,
+                episodeSong = it
             )
         }
     }

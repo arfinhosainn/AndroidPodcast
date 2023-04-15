@@ -71,7 +71,7 @@ fun NavGraphBuilder.detailRoute() {
             onEpisodeSelected = {
                 viewModel.playPodcast(listOf(it))
             },
-            episodeSong = detailsState.episode
+            detailScreenState = detailsState
         )
     }
 }

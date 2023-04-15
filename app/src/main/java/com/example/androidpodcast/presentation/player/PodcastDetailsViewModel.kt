@@ -54,22 +54,28 @@ class PodcastDetailsViewModel @Inject constructor(
         musicServiceConnection.skipTo(convertToPosition(position, musicState.value.duration))
 
     private fun getPodcastEpisodes(showId: String) {
-        repository.getEpisodeForPodcast(showId).onEach { result ->
-            when (result) {
-                is Resource.Error -> {
-                    detailState.value =
-                        DetailScreenState(error = result.message ?: "An unexpected error occurred")
-                }
-                is Resource.Loading -> {
-                    detailState.value = DetailScreenState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    withContext(Dispatchers.IO) {
-                        detailState.value = DetailScreenState(episode = result.data ?: emptyList())
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getEpisodeForPodcast(showId).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        detailState.value =
+                            DetailScreenState(
+                                error = result.message ?: "An unexpected error occurred"
+                            )
+                    }
+                    is Resource.Loading -> {
+                        detailState.value = DetailScreenState(isLoading = true)
+                    }
+                    is Resource.Success -> {
+                        withContext(Dispatchers.IO) {
+                            detailState.value = DetailScreenState(
+                                episode = result.data ?: emptyList()
+                            )
+                        }
                     }
                 }
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }
 
