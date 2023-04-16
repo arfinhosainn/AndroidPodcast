@@ -42,14 +42,14 @@ fun PlayerHeader(
             contentScale = ContentScale.Crop,
             modifier = modifier
                 .fillMaxWidth()
-                .height(320.dp)
+                .height(350.dp)
                 .aspectRatio(1f)
                 .clip(MaterialTheme.shapes.medium)
         )
 
         Box(
             modifier = modifier
-                .height(320.dp)
+                .height(350.dp)
                 .fillMaxWidth()
                 .background(
                     Color.Black.copy(alpha = 0.5f)
@@ -57,7 +57,7 @@ fun PlayerHeader(
         ) {
             Box(
                 modifier = modifier
-                    .height(320.dp)
+                    .height(350.dp)
                     .fillMaxWidth()
                     .background(
                         Brush.verticalGradient(
