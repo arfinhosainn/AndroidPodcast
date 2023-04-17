@@ -27,9 +27,9 @@ class RemoteDataSourceImpl @Inject constructor(
             emit(Resource.Success(podcasts))
             Log.d("podcastList", "getCuratedPodcastList: $response")
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))
+            emit(Resource.Error(e.localizedMessage!!))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unknown error occurred"))
+            emit(Resource.Error(e.localizedMessage!!))
         }
     }
 
