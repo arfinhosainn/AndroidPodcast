@@ -31,7 +31,7 @@ class PodcastApiTest {
     @Test
     fun testGetCuratedPodcastList() = runBlocking {
         val mockResponse = MockResponse()
-        val content = Helper.readFileResources("/response.json")
+        val content = Helper.readFileResources("/curatedlist.json")
         mockResponse.setResponseCode(200)
         mockResponse.setBody(content)
         mockWebServer.enqueue(mockResponse)
@@ -46,7 +46,7 @@ class PodcastApiTest {
     @Test
     fun testGetEpisodePodcastByShowId() = runBlocking {
         val mockResponse = MockResponse()
-        val content = Helper.readFileResources("/response.json")
+        val content = Helper.readFileResources("/curatedlist.json")
         mockResponse.setResponseCode(200)
         mockResponse.setBody(content)
         mockWebServer.enqueue(mockResponse)
