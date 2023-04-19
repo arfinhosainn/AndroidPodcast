@@ -1,0 +1,26 @@
+{
+  "response": {
+    "items": [
+      {
+        "show_id": 5686560,
+        "title": "Asian Glow Podcast with Clarence Angelo",
+        "image_url": "https://d1bm3dmew779uf.cloudfront.net/large/e1ac69e933ba409921a52b5c00a77d98.jpg",
+        "image_original_url": "https://d3wo5wojvuv7l.cloudfront.net/images.spreaker.com/original/e1ac69e933ba409921a52b5c00a77d98.jpg",
+        "explicit": true,
+        "author_id": 16774734,
+        "last_episode_at": "2023-03-27 21:22:56",
+        "site_url": "https://www.spreaker.com/show/asian-glow-podcast-with-clarence-angelo"
+      },
+      {
+        "show_id": 2664729,
+        "title": "Indie Film Hustle® - A Filmmaking Podcast",
+        "image_url": "https://d1bm3dmew779uf.cloudfront.net/large/77e8c6f99031abc6d8569d8f0a950398.jpg",
+        "image_original_url": "https://d3wo5wojvuv7l.cloudfront.net/images.spreaker.com/original/77e8c6f99031abc6d8569d8f0a950398.jpg",
+        "explicit": true,
+        "author_id": 9100075,
+        "last_episode_at": "2023-04-13 14:30:02",
+        "site_url": "https://www.spreaker.com/show/indie-film-hustle-podcast"
+      }
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 package com.example.androidpodcast.data.remote.repository
 
-import android.util.Log
 import com.example.androidpodcast.data.remote.PodcastApi
 import com.example.androidpodcast.data.remote.mappers.Episode
 import com.example.androidpodcast.data.remote.mappers.toEpisodeSong
@@ -25,11 +24,10 @@ class RemoteDataSourceImpl @Inject constructor(
             val response = api.getCuratedPodcastList()
             val podcasts = response.response.items.map { it.toPodcastList() }
             emit(Resource.Success(podcasts))
-            Log.d("podcastList", "getCuratedPodcastList: $response")
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))
-        } catch (e: IOException) {
             emit(Resource.Error(e.localizedMessage ?: "An unknown error occurred"))
+        } catch (e: IOException) {
+            emit(Resource.Error("Could not reach server. Check your internet connection"))
         }
     }
 
@@ -42,7 +40,7 @@ class RemoteDataSourceImpl @Inject constructor(
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unknown error occurred"))
+            emit(Resource.Error("Could not reach server, Check your internet connection"))
         }
     }
 
@@ -55,7 +53,7 @@ class RemoteDataSourceImpl @Inject constructor(
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unknown error occurred"))
+            emit(Resource.Error("Could not reach server, Check your internet connection"))
         }
     }
 }

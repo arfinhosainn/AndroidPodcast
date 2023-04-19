@@ -13,8 +13,8 @@ import com.example.androidpodcast.downloader.PodcastDownloader
 import com.example.androidpodcast.presentation.player.components.PlayerHeader
 import com.example.androidpodcast.presentation.player.components.PodcastContent
 import com.example.androidpodcast.presentation.player.components.PodcastListScreen
+import com.example.androidpodcast.util.TransparentSystemBars
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PodcastPlayerScreen(
     playWhenReady: Boolean,
@@ -34,7 +34,10 @@ fun PodcastPlayerScreen(
 
     val downloader = PodcastDownloader(context)
 
-    LazyColumn(verticalArrangement = Arrangement.spacedBy((-20).dp), state = statre) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy((-17).dp), state = statre) {
+        item {
+            TransparentSystemBars()
+        }
         item {
             PlayerHeader(
                 trackImageUrl = trackImageUrl,
@@ -49,7 +52,8 @@ fun PodcastPlayerScreen(
             PodcastContent(
                 currentPosition = currentPosition,
                 duration = duration,
-                onSkipTo = onSkipTo
+                onSkipTo = onSkipTo,
+                episodeCount = detailScreenState.episode.size
             )
         }
         items(detailScreenState.episode) {

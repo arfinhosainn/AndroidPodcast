@@ -34,6 +34,7 @@ import coil.compose.AsyncImage
 import com.example.androidpodcast.R
 import com.example.androidpodcast.domain.model.PodcastList
 import com.example.androidpodcast.ui.theme.Elevation
+import com.example.androidpodcast.ui.theme.lightBlue
 
 @Composable
 fun HomeContent(
@@ -52,6 +53,25 @@ fun HomeContent(
                         onPodcastClick = onPodcastClick
                     )
                 }
+
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 32.dp, vertical = 44.dp)
+                    ) {
+                        Text(
+                            text = "Latest Podcasts",
+                            style = TextStyle(
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Medium
+                            ),
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
                 item {
                     RecentPodcastHolder(homeState = homeState)
                 }
@@ -89,7 +109,7 @@ fun NewPodcast(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
+                .height(280.dp)
                 .clip(shape = RoundedCornerShape(bottomStart = 40.dp)),
             contentAlignment = Alignment.Center
         ) {
@@ -112,7 +132,7 @@ fun NewPodcast(
                                 onPodcastClick(podcast)
                             }
                             .width(309.dp)
-                            .height(192.dp)
+                            .height(180.dp)
                             .onGloballyPositioned {
                                 componentHeight = with(localDensity) { it.size.height.toDp() }
                             },
@@ -192,7 +212,7 @@ fun NewPodcastFooter(
 
         Box(
             modifier = Modifier
-                .size(60.dp)
+                .size(50.dp)
                 .shadow(
                     elevation = 10.dp,
                     shape = CircleShape,
@@ -218,7 +238,7 @@ fun RecentPodcastHolder(
 ) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(30.dp),
+        horizontalArrangement = Arrangement.spacedBy(15.dp),
         contentPadding = PaddingValues(horizontal = 30.dp)
     ) {
         items(homeState.episodes) {
@@ -241,7 +261,7 @@ fun RecentPodcastItem(
 ) {
     Surface(
         modifier = Modifier
-            .height(234.dp)
+            .height(270.dp)
             .width(147.dp)
     ) {
         Column() {
@@ -249,7 +269,12 @@ fun RecentPodcastItem(
                 modifier = Modifier
                     .height(136.dp)
                     .width(147.dp),
-                shape = RoundedCornerShape(16.dp, bottomEnd = 0.dp)
+                shape = RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 16.dp,
+                    bottomStart = 16.dp,
+                    bottomEnd = 0.dp
+                )
             ) {
                 AsyncImage(
                     modifier = Modifier.fillMaxSize(),
@@ -258,6 +283,7 @@ fun RecentPodcastItem(
                     contentDescription = "Podcast Thumbnail"
                 )
             }
+            Spacer(modifier = Modifier.height(19.dp))
             Text(
                 text = title,
                 style = TextStyle(
@@ -267,6 +293,7 @@ fun RecentPodcastItem(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = Modifier.height(14.dp))
             Text(
                 text = duration,
                 style = TextStyle(
@@ -274,6 +301,7 @@ fun RecentPodcastItem(
                     fontWeight = FontWeight.Normal
                 )
             )
+
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth(),
@@ -289,15 +317,8 @@ fun RecentPodcastItem(
 
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
-                        .shadow(
-                            elevation = 10.dp,
-                            shape = CircleShape,
-                            clip = true,
-                            ambientColor = Color.Red,
-                            spotColor = Color.Red
-                        )
-                        .background(Color.Red, CircleShape),
+                        .size(32.dp)
+                        .background(lightBlue, CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(

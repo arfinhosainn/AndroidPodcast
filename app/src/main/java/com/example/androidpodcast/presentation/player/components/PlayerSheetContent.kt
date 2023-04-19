@@ -47,7 +47,8 @@ import com.example.androidpodcast.ui.theme.lightBlue
 fun PodcastContent(
     currentPosition: Long,
     duration: Long,
-    onSkipTo: (Float) -> Unit
+    onSkipTo: (Float) -> Unit,
+    episodeCount: Int
 
 ) {
     Box(
@@ -59,7 +60,7 @@ fun PodcastContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 33.dp, vertical = 45.dp)
+                .padding(start = 33.dp, end = 33.dp, top = 45.dp)
         ) {
             PlayerTimeSlider(
                 currentPosition = currentPosition,
@@ -74,7 +75,7 @@ fun PodcastContent(
             PodcastDetails()
             Spacer(modifier = Modifier.height(40.dp))
             Text(
-                text = "Episode 1",
+                text = "Episodes ($episodeCount)",
                 color = Color.White,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
@@ -93,13 +94,12 @@ fun PodcastListScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
             .background(MaterialTheme.colorScheme.onSurface)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 33.dp, vertical = 45.dp)
+                .padding(start = 33.dp, end = 33.dp, bottom = 15.dp, top = 18.dp)
         ) {
             PodcastEpisodeList(onClick = onEpisodeSelected, episodeSong = episodeSong)
         }
