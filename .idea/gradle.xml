@@ -13,6 +13,16 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-data" />
+            <option value="$PROJECT_DIR$/core/core-domain" />
+            <option value="$PROJECT_DIR$/core/core-media" />
+            <option value="$PROJECT_DIR$/core/core-network" />
+            <option value="$PROJECT_DIR$/core/core-ui" />
+            <option value="$PROJECT_DIR$/core/core-util" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/feature-home" />
+            <option value="$PROJECT_DIR$/feature/feature-player" />
           </set>
         </option>
       </GradleProjectSettings>

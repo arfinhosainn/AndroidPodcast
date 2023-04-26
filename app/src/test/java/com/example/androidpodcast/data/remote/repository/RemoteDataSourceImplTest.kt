@@ -2,7 +2,6 @@ package com.example.androidpodcast.data.remote.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.androidpodcast.data.remote.Helper
-import com.example.androidpodcast.data.remote.PodcastApi
 import com.example.androidpodcast.data.remote.mappers.Episode
 import com.example.androidpodcast.domain.model.EpisodeSong
 import com.example.androidpodcast.domain.model.PodcastList
