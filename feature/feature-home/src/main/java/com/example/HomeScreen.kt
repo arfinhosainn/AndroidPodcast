@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.feature_home.R
 import com.example.util.Screen
-import com.example.util.TransparentSystemBars
 
 @Composable
 fun HomeScreen(
@@ -48,7 +47,6 @@ fun HomeScreen(
         mutableStateOf(PaddingValues())
     }
 
-    TransparentSystemBars()
 
     NavigationDrawer(
         drawerState = drawerState,

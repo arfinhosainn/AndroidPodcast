@@ -1,11 +1,12 @@
-package com.example.repository
+package com.example
 
-import com.example.PodcastApi
+import com.example.core_di.remote.PodcastApi
 import com.example.mappers.Episode
 import com.example.mappers.toEpisodeSong
 import com.example.mappers.toPodcastList
 import com.example.model.EpisodeSong
 import com.example.model.PodcastList
+import com.example.repository.RemoteDataSource
 import com.example.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,6 +1,5 @@
-package com.example
+package com.example.core_di.remote
 
-import com.example.androidpodcast.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -11,7 +10,7 @@ class ApiKeyInterceptor @Inject constructor() : Interceptor {
         val request = chain.request()
             .newBuilder()
 
-        request.addHeader("X-ListenAPI-Key", value = BuildConfig.API_KEY)
+        request.addHeader("X-ListenAPI-Key", value = "")
         return chain.proceed(request.build())
     }
 }

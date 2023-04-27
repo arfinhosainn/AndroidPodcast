@@ -1,4 +1,4 @@
-package com.example.util
+package com.example.androidpodcast
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

@@ -4,9 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Constants.DEFAULT_POSITION_MS
-import com.example.common.RemoteDataSource
 import com.example.exoplayer.PodcastServiceConnection
 import com.example.model.EpisodeSong
+import com.example.repository.RemoteDataSource
 import com.example.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

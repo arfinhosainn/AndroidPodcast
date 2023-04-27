@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -39,8 +42,12 @@ dependencies {
     implementation libs.retrofit
     implementation libs.retrofit.converter
 
-    implementation(project(":core:core-domain"))
-    implementation(project(":core:core-network"))
+
     implementation(project(":core:core-util"))
+    implementation(project(":core:core-domain"))
+
+
+
+
 
 }

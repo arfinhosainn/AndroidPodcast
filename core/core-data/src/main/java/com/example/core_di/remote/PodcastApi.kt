@@ -1,4 +1,4 @@
-package com.example
+package com.example.core_di.remote
 
 import com.example.mappers.Podcasts
 import com.example.mappers.Show

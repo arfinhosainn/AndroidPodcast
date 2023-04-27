@@ -39,7 +39,11 @@ dependencies {
   implementation libs.retrofit.converter
     kapt libs.hilt.compiler
     implementation libs.hilt.android
+
     implementation(project(":core:core-util"))
+    implementation(project(":core:core-domain"))
+    implementation(project(":feature:feature-home"))
     implementation(project(":app"))
+
 
 }

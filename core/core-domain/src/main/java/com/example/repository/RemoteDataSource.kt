@@ -1,4 +1,4 @@
-package com.example.common
+package com.example.repository
 
 import com.example.mappers.Episode
 import com.example.model.EpisodeSong

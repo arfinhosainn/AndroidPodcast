@@ -1,8 +1,9 @@
-package com.example.di
+package com.example.core_di
 
-import com.example.ApiKeyInterceptor
-import com.example.PodcastApi
-import com.example.repository.RemoteDataSourceImpl
+import com.example.RemoteDataSourceImpl
+import com.example.core_di.remote.ApiKeyInterceptor
+import com.example.core_di.remote.PodcastApi
+import com.example.repository.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,15 +14,21 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit.Builder {
         return Retrofit.Builder().baseUrl("https://api.spreaker.com/v2/")
             .addConverterFactory(MoshiConverterFactory.create())
+    }
+
+    @Singleton
+    @Provides
+    fun providesRemoteDataSource(api: PodcastApi): RemoteDataSource {
+        return RemoteDataSourceImpl(api)
     }
 
     @Singleton
@@ -41,9 +48,5 @@ object NetworkModule {
         return retrofitBuilder.client(okHttpClient).build().create(PodcastApi::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun providesRemoteDataSource(api: PodcastApi): RemoteDataSource {
-        return RemoteDataSourceImpl(api)
-    }
+
 }

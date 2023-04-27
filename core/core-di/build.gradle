@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.core_domain'
+    namespace 'com.example.core_di'
     compileSdk 33
 
     defaultConfig {
@@ -30,22 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions.jvmTarget = "1.8"
-    }
 }
 
 dependencies {
-
-    implementation libs.coroutines.core
-    implementation libs.retrofit
     kapt libs.hilt.compiler
     implementation libs.hilt.android
-    implementation libs.retrofit.converter
-
-    implementation(project(":core:core-util"))
-
-
 
 
 

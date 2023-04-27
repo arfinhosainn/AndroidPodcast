@@ -12,7 +12,6 @@ import com.example.components.PodcastContent
 import com.example.components.PodcastListScreen
 import com.example.downloader.PodcastDownloader
 import com.example.model.EpisodeSong
-import com.example.util.TransparentSystemBars
 
 @Composable
 fun PodcastPlayerScreen(
@@ -34,9 +33,7 @@ fun PodcastPlayerScreen(
     val downloader = PodcastDownloader(context)
 
     LazyColumn(verticalArrangement = Arrangement.spacedBy((-17).dp), state = statre) {
-        item {
-            TransparentSystemBars()
-        }
+
         item {
             PlayerHeader(
                 trackImageUrl = trackImageUrl,
