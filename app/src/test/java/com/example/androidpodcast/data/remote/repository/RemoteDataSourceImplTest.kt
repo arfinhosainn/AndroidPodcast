@@ -1,11 +1,13 @@
 package com.example.androidpodcast.data.remote.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.RemoteDataSourceImpl
 import com.example.androidpodcast.data.remote.Helper
-import com.example.androidpodcast.data.remote.mappers.Episode
-import com.example.androidpodcast.domain.model.EpisodeSong
-import com.example.androidpodcast.domain.model.PodcastList
-import com.example.androidpodcast.util.Resource
+import com.example.core_di.remote.PodcastApi
+import com.example.mappers.Episode
+import com.example.model.EpisodeSong
+import com.example.model.PodcastList
+import com.example.util.Resource
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
