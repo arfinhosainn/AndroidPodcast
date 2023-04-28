@@ -212,7 +212,7 @@ fun NewPodcastFooter(
                     style = TextStyle(
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.background
+                        color = MaterialTheme.colorScheme.onBackground
                     ),
                     maxLines = 4,
                     overflow = TextOverflow.Ellipsis

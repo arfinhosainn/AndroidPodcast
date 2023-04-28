@@ -24,15 +24,13 @@ fun PodcastPlayerScreen(
     duration: Long,
     onSkipTo: (Float) -> Unit,
     onEpisodeSelected: (EpisodeSong) -> Unit,
+    onDownLoadClick: (String) -> Unit,
     detailScreenState: DetailScreenState
 
 ) {
-    val context = LocalContext.current
-    val statre = rememberLazyListState()
+    val state = rememberLazyListState()
 
-    val downloader = PodcastDownloader(context)
-
-    LazyColumn(verticalArrangement = Arrangement.spacedBy((-17).dp), state = statre) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy((-17).dp), state = state) {
 
         item {
             PlayerHeader(
@@ -40,9 +38,9 @@ fun PodcastPlayerScreen(
                 playWhenReady = playWhenReady,
                 play = onMediaButtonPlayClick,
                 pause = onMediaButtonPauseClick,
-                forward10 = onMediaButtonSkipNextClick
-            ) {
-            }
+                forward10 = onMediaButtonSkipNextClick,
+                previous = {}
+            )
         }
         item {
             PodcastContent(
@@ -55,17 +53,10 @@ fun PodcastPlayerScreen(
         items(detailScreenState.episode) {
             PodcastListScreen(
                 onEpisodeSelected = onEpisodeSelected,
-                episodeSong = it
+                episodeSong = it,
+                onDownLoadClick = onDownLoadClick,
+                duration = duration
             )
         }
     }
 }
-
-// @Preview
-// @Composable
-// fun PreviewPodcastPlayerScreen() {
-//    PodcastPlayerScreen(
-//        playWhenReady = true,
-//        trackImageUrl = ""
-//    )
-// }

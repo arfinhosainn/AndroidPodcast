@@ -24,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +43,8 @@ import androidx.compose.ui.unit.sp
 import com.example.feature_player.R
 import com.example.model.EpisodeSong
 import com.example.ui.theme.lightBlue
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun PodcastContent(
@@ -55,7 +58,7 @@ fun PodcastContent(
         modifier = Modifier
             .fillMaxSize()
             .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-            .background(MaterialTheme.colorScheme.onSurface)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
@@ -76,7 +79,6 @@ fun PodcastContent(
             Spacer(modifier = Modifier.height(40.dp))
             Text(
                 text = "Episodes ($episodeCount)",
-                color = Color.White,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.padding(start = 8.dp, end = 16.dp)
@@ -89,19 +91,24 @@ fun PodcastContent(
 @Composable
 fun PodcastListScreen(
     onEpisodeSelected: (EpisodeSong) -> Unit,
-    episodeSong: EpisodeSong
+    episodeSong: EpisodeSong,
+    onDownLoadClick: (String) -> Unit,
+    duration: Long
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.onSurface)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 33.dp, end = 33.dp, bottom = 15.dp, top = 18.dp)
         ) {
-            PodcastEpisodeList(onClick = onEpisodeSelected, episodeSong = episodeSong)
+            PodcastEpisodeList(
+                onClick = onEpisodeSelected, episodeSong = episodeSong,
+                onDownLoadClick = onDownLoadClick
+            )
         }
     }
 }
@@ -109,13 +116,13 @@ fun PodcastListScreen(
 @Composable
 fun PodcastEpisodeList(
     onClick: (EpisodeSong) -> Unit,
+    onDownLoadClick: (String) -> Unit,
     episodeSong: EpisodeSong
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
-            .padding(vertical = 6.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(MaterialTheme.colorScheme.background),
         tonalElevation = 4.dp
@@ -128,6 +135,7 @@ fun PodcastEpisodeList(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
+                modifier = Modifier.weight(1f), // add weight modifier
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
@@ -155,16 +163,16 @@ fun PodcastEpisodeList(
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text(
-                        text = episodeSong.published_at,
+                        text = if (episodeSong.title.length > 30) episodeSong.title.take(30) else  episodeSong.title,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                        maxLines = 1,
+                        maxLines = if (episodeSong.title.length > 30) 1 else 2,
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
-                        text = "Second Text",
+                        text = episodeSong.published_at.toFormattedDateString(),
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal
@@ -178,29 +186,13 @@ fun PodcastEpisodeList(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
-                    Text(
-                        text = episodeSong.title,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Normal
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        text = episodeSong.title,
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
                 Spacer(modifier = Modifier.width(16.dp))
                 Image(
-                    modifier = Modifier.size(30.dp),
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable(onClick = {
+                            onDownLoadClick(episodeSong.download_url)
+                        }),
                     imageVector = ImageVector.vectorResource(id = R.drawable.download),
                     contentDescription = ""
                 )
@@ -209,23 +201,6 @@ fun PodcastEpisodeList(
     }
 }
 
-val episodeNumber = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-
-// @Preview(uiMode = UI_MODE_NIGHT_YES)
-// @Composable
-// fun PreviewPodcastEpisodeList() {
-//    PodcastEpisodeList(
-//        episodeDate = "23 May 2019",
-//        episodeDuration = "10:15:00",
-//        downloadSize = "23mb"
-//    )
-// }
-
-// @Preview()
-// @Composable
-// fun PreviewPlayerSheetContent() {
-//    PodcastContent(currentPosition = 200L, duration = 343L, onSkipTo = {})
-// }
 
 @Preview
 @Composable
@@ -276,6 +251,7 @@ fun InfoSection() {
 
 @Composable
 fun PodcastDetails() {
+    val description = remember { generateRandomDescription() }
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -315,21 +291,59 @@ fun PodcastDetails() {
         }
         Spacer(modifier = Modifier.height(41.dp))
         Text(
-            text = "The Big Oxmox advised her not to do so," +
-                " because there were thousands of bad Commas," +
-                " wild Question Marks and devious Semikoli," +
-                " but the Little Blind Text didn’t listen. ",
+            text = description,
             style = TextStyle(
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Normal,
-                lineHeight = 20.sp
+                lineHeight = 20.sp,
+                color = MaterialTheme.colorScheme.onBackground
             )
         )
     }
+}
+
+
+val descriptions = listOf(
+    "The quick brown fox jumps over the lazy dog.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    "In hac habitasse platea dictumst. Sed elementum nisi et augue placerat, quis bibendum lectus auctor.",
+    "Vivamus vel nulla nec felis fringilla tincidunt.",
+    "Pellentesque quis diam at mauris hendrerit bibendum nec in tellus.",
+    "Nullam vitae tortor sit amet justo molestie gravida vel ac dolor.",
+    "Nam euismod aliquet elit, eu ullamcorper velit pulvinar ac.",
+    "Quisque eget nisl eu felis sagittis euismod.",
+    "Donec pharetra euismod orci, eu consequat massa mollis id.",
+    "Maecenas id nunc purus. Suspendisse eget est in est aliquam malesuada.",
+    "Aliquam feugiat felis vel urna bibendum, quis tristique nunc auctor.",
+    "Morbi feugiat, odio vel convallis feugiat, ipsum lacus sodales quam, eu molestie orci odio non ex.",
+    "Suspendisse quis nunc ac sapien faucibus interdum.",
+    "Curabitur id eros at neque aliquam tincidunt id vel est.",
+    "Praesent dignissim suscipit libero, vitae varius odio blandit vitae.",
+    "Proin maximus, massa eu ullamcorper tincidunt, ipsum nisl interdum quam, a suscipit leo nulla sit amet ipsum.",
+    "Etiam ac ex tincidunt, eleifend urna in, sagittis nunc.",
+    "Nam pellentesque finibus turpis ac bibendum. Nulla tincidunt non purus non interdum.",
+    "Phasellus quis eros et felis egestas maximus eu sit amet dui."
+)
+
+fun generateRandomDescription(): String {
+    val lines = mutableListOf<String>()
+    repeat(5) {
+        val index = (0..19).random()
+        lines.add(descriptions[index])
+    }
+    return lines.joinToString("\n")
 }
 
 @Preview
 @Composable
 fun PreviewPodcastDetails() {
     PodcastDetails()
+}
+
+fun String.toFormattedDateString(): String {
+    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val outputDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+    val date = inputDateFormat.parse(this)
+    return outputDateFormat.format(date!!)
 }

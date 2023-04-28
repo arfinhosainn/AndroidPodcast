@@ -1,4 +1,4 @@
-package com.example.core_di.remote
+package com.example.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

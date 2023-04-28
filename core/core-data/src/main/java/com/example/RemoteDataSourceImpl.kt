@@ -1,6 +1,6 @@
 package com.example
 
-import com.example.core_di.remote.PodcastApi
+import com.example.remote.PodcastApi
 import com.example.mappers.Episode
 import com.example.mappers.toEpisodeSong
 import com.example.mappers.toPodcastList

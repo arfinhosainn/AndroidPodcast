@@ -1,8 +1,8 @@
 package com.example.core_di
 
 import com.example.RemoteDataSourceImpl
-import com.example.core_di.remote.ApiKeyInterceptor
-import com.example.core_di.remote.PodcastApi
+import com.example.remote.ApiKeyInterceptor
+import com.example.remote.PodcastApi
 import com.example.repository.RemoteDataSource
 import dagger.Module
 import dagger.Provides
