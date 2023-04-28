@@ -45,6 +45,8 @@ dependencies {
     implementation libs.coroutines.core
     kapt libs.hilt.compiler
     implementation libs.hilt.android
+    implementation libs.junit
+    implementation libs.junit.ext
 
     implementation(project(":core:core-util"))
 

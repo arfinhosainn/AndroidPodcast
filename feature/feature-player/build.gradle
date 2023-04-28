@@ -55,6 +55,8 @@ dependencies {
     implementation libs.hilt.navigation.compose
     implementation libs.lifecycle.runtime
     implementation libs.runtime.compose
+    implementation libs.junit
+    implementation libs.junit.ext
 
 
 

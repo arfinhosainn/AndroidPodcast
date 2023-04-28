@@ -41,6 +41,8 @@ dependencies {
     implementation libs.hilt.android
     implementation libs.retrofit
     implementation libs.retrofit.converter
+    implementation libs.junit
+    implementation libs.junit.ext
 
 
     implementation(project(":core:core-util"))
