@@ -25,6 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -137,19 +138,18 @@ fun PlayerHeader(
     }
 }
 
-// @Preview
-// @Composable
-// fun PreviewPayerHeader() {
-//    PlayerHeader(
-//        trackImageUrl =
-//        "https://d3wo5wojvuv7l.cloudfront.net/images.spreaker.com/original/" +
-//            "89b95da0b9cae6f703a0b2b03eda38ce.jpg",
-//        playWhenReady = true,
-//        play = { /*TODO*/ },
-//        pause = { /*TODO*/ },
-//        replay10 = { /*TODO*/ },
-//        forward10 = { /*TODO*/ },
-//        next = { /*TODO*/ },
-//        previous = { /*TODO*/ }
-//    )
-// }
+ @Preview
+ @Composable
+ fun PreviewPayerHeader() {
+    PlayerHeader(
+        trackImageUrl =
+        "https://d3wo5wojvuv7l.cloudfront.net/images.spreaker.com/original/" +
+            "89b95da0b9cae6f703a0b2b03eda38ce.jpg",
+        playWhenReady = true,
+        play = { /*TODO*/ },
+        pause = { /*TODO*/ },
+        forward10 = { /*TODO*/ },
+
+        previous = { /*TODO*/ }
+    )
+ }

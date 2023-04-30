@@ -72,6 +72,11 @@ class PodcastServiceConnection @Inject constructor(
         play()
     }
 
+    fun seekTo10Seconds(position: Long) = mediaBrowser?.run {
+        seekTo(position)
+        play()
+    }
+
     fun playSongs(
         songs: List<EpisodeSong>,
         startIndex: Int = DEFAULT_INDEX,

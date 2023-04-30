@@ -1,7 +1,7 @@
 package com.example.navigation
 
+import android.util.Log
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -25,12 +25,12 @@ fun NavGraphBuilder.detailRoute() {
             playWhenReady = podcastState.playWhenReady,
             trackImageUrl = podcastState.currentSong.image_original_url,
             onMediaButtonPlayClick = {
-//                viewModel.playPodcast()
-            },
-            onMediaButtonPauseClick = {
                 viewModel.resume()
             },
-            onMediaButtonSkipNextClick = viewModel::skipNext,
+            onMediaButtonPauseClick = {
+                viewModel.pause()
+            },
+            onMediaButtonSkipNextClick = viewModel::seekTo10Seconds,
             currentPosition = currentSliderState,
             duration = podcastState.duration,
             onSkipTo = viewModel::skipTo,
@@ -43,4 +43,5 @@ fun NavGraphBuilder.detailRoute() {
             }
         )
     }
+
 }

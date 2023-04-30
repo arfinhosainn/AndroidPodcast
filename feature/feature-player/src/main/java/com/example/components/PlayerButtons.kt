@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.feature_player.R
 
@@ -58,16 +59,16 @@ fun PlayerButtons(
                         clip = true,
                         ambientColor = Color.Red,
                         spotColor = Color.Red
-                    )
+                    ).clickable(onClick = {
+                        pause()
+                    })
                     .background(Color.Red, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     imageVector = ImageVector.vectorResource(id = R.drawable.pause),
                     contentDescription = "Play Icon",
-                    modifier = Modifier.size(20.dp).clickable {
-                        play()
-                    }
+                    modifier = Modifier.size(20.dp)
                 )
             }
         } else {
@@ -80,16 +81,16 @@ fun PlayerButtons(
                         clip = true,
                         ambientColor = Color.Red,
                         spotColor = Color.Red
-                    )
+                    ).clickable(onClick = {
+                        play()
+                    })
                     .background(Color.Red, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     imageVector = ImageVector.vectorResource(id = R.drawable.play),
                     contentDescription = "Play Icon",
-                    modifier = Modifier.size(20.dp).clickable {
-                        pause()
-                    }
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -106,16 +107,15 @@ fun PlayerButtons(
     }
 }
 
-// @Preview
-// @Composable
-// fun PreviewPlayerButton() {
-//    PlayerButtons(
-//        playWhenReady = true,
-//        play = { /*TODO*/ },
-//        pause = { /*TODO*/ },
-//        replay10 = { /*TODO*/ },
-//        forward10 = { /*TODO*/ },
-//        next = { /*TODO*/ },
-//        previous = { /*TODO*/ }
-//    )
-// }
+ @Preview
+ @Composable
+ fun PreviewPlayerButton() {
+    PlayerButtons(
+        playWhenReady = true,
+        play = { /*TODO*/ },
+        pause = { /*TODO*/ },
+        forward10 = { /*TODO*/ },
+
+        previous = { /*TODO*/ }
+    )
+ }
