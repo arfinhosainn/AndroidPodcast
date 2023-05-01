@@ -32,6 +32,7 @@ fun Episode.toEpisodeSong(): EpisodeSong {
         title = title,
         image_original_url = image_original_url,
         published_at = published_at,
-        download_url = download_url
+        download_url = download_url,
+        duration = duration
     )
 }

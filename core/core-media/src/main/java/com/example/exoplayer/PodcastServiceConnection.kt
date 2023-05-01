@@ -119,7 +119,7 @@ class PodcastServiceConnection @Inject constructor(
     private fun updateMusicState(player: Player) = with(player) {
         _musicState.update {
             it.copy(
-                currentSong = currentMediaItem.asPodcast(),
+                currentPodcast = currentMediaItem.asPodcast(),
                 playbackState = playbackState.asPlaybackState(),
                 playWhenReady = playWhenReady,
                 duration = duration.orDefaultTimestamp()

@@ -1,6 +1,5 @@
 package com.example.navigation
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -11,6 +10,7 @@ import com.example.PodcastDetailsViewModel
 import com.example.PodcastPlayerScreen
 import com.example.downloader.PodcastDownloader
 import com.example.util.Screen
+import com.example.util.toFormattedDuration
 
 fun NavGraphBuilder.detailRoute() {
     composable(route = Screen.DetailScreen.route + "/{showId}") {
@@ -23,7 +23,7 @@ fun NavGraphBuilder.detailRoute() {
 
         PodcastPlayerScreen(
             playWhenReady = podcastState.playWhenReady,
-            trackImageUrl = podcastState.currentSong.image_original_url,
+            trackImageUrl = podcastState.currentPodcast.image_original_url,
             onMediaButtonPlayClick = {
                 viewModel.resume()
             },
@@ -40,7 +40,8 @@ fun NavGraphBuilder.detailRoute() {
             detailScreenState = detailsState,
             onDownLoadClick = {
                 downloader.downloadPodcast(it)
-            }
+            },
+            title = podcastState.currentPodcast.title
         )
     }
 

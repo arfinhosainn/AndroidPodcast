@@ -3,7 +3,7 @@ package com.example.common
 import com.example.model.EpisodeSong
 
 data class PodcastState(
-    val currentSong: EpisodeSong = EpisodeSong(
+    val currentPodcast: EpisodeSong = EpisodeSong(
         author_id = Constants.DEFAULT_MEDIA_ID,
         episode_id = -1,
         show_id = -1,
@@ -12,7 +12,8 @@ data class PodcastState(
         title = "",
         image_url = "",
         published_at = "",
-        download_url = ""
+        download_url = "",
+        duration = 0
     ),
     val playbackState: PlaybackState = PlaybackState.IDLE,
     val playWhenReady: Boolean = false,

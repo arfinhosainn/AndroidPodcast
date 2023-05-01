@@ -11,6 +11,8 @@ import coil.request.ImageRequest
 import com.example.common.Constants
 import com.example.common.PlaybackState
 import com.example.core_util.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 fun Int.asPlaybackState() = when (this) {
     Player.STATE_IDLE -> PlaybackState.IDLE
@@ -19,6 +21,23 @@ fun Int.asPlaybackState() = when (this) {
     Player.STATE_ENDED -> PlaybackState.ENDED
     else -> error(Constants.INVALID_PLAYBACK_STATE_ERROR_MESSAGE)
 }
+
+
+fun String.toFormattedDateString(): String {
+    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val outputDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+    val date = inputDateFormat.parse(this)
+    return outputDateFormat.format(date!!)
+}
+
+fun Int.toFormattedDuration(): String {
+    val seconds = (this / 1000)
+    val hours = seconds / 3600
+    val minutes = (seconds % 3600) / 60
+    val secs = seconds % 60
+    return String.format("%02d:%02d:%02d", hours, minutes, secs)
+}
+
 
  fun Long.orDefaultTimestamp() = takeIf { it != C.TIME_UNSET }
     ?: Constants.DEFAULT_DURATION_MS

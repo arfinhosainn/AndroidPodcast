@@ -21,8 +21,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -56,6 +54,8 @@ import com.example.feature_home.R
 import com.example.model.PodcastList
 import com.example.ui.theme.Elevation
 import com.example.ui.theme.lightBlue
+import com.example.util.toFormattedDateString
+import com.example.util.toFormattedDuration
 
 @Composable
 fun HomeContent(
@@ -72,6 +72,7 @@ fun HomeContent(
                         paddingValues = paddingValues,
                         podcast = homeState,
                         onPodcastClick = onPodcastClick
+
                     )
                 }
 
@@ -183,7 +184,7 @@ fun NewPodcast(
                             ) {
                                 Spacer(modifier = Modifier.height(8.dp))
                                 NewPodcastFooter(
-                                    publisher = podcast.last_episode_at.take(10),
+                                    publisher = podcast.last_episode_at.toFormattedDateString(),
                                     title = podcast.title
                                 )
                             }
@@ -220,7 +221,6 @@ fun NewPodcastFooter(
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row() {
-                Icon(imageVector = Icons.Default.DateRange, contentDescription = "Date Icon")
                 Text(
                     text = publisher,
                     style = TextStyle(
@@ -266,7 +266,7 @@ fun RecentPodcastHolder(
         items(homeState.episodes) {
             RecentPodcastItem(
                 title = it.title,
-                duration = it.published_at,
+                duration = it.duration.toFormattedDuration(),
                 author = "John Doe",
                 thumbnail = it.image_original_url
             )
@@ -316,13 +316,26 @@ fun RecentPodcastItem(
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(14.dp))
-            Text(
-                text = duration,
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.time),
+                    contentDescription = "duration"
                 )
-            )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = duration,
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                )
+               
+
+            }
 
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,

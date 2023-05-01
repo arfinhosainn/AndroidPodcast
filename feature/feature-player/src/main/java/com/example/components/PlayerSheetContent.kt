@@ -43,8 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.example.feature_player.R
 import com.example.model.EpisodeSong
 import com.example.ui.theme.lightBlue
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.util.toFormattedDateString
 
 @Composable
 fun PodcastContent(
@@ -92,8 +91,7 @@ fun PodcastContent(
 fun PodcastListScreen(
     onEpisodeSelected: (EpisodeSong) -> Unit,
     episodeSong: EpisodeSong,
-    onDownLoadClick: (String) -> Unit,
-    duration: Long
+    onDownLoadClick: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -163,7 +161,7 @@ fun PodcastEpisodeList(
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text(
-                        text = if (episodeSong.title.length > 30) episodeSong.title.take(30) else  episodeSong.title,
+                        text = if (episodeSong.title.length > 30) episodeSong.title.take(30) else episodeSong.title,
                         style = TextStyle(
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
@@ -225,20 +223,23 @@ fun InfoSection() {
             )
             Text(
                 text = "37 501",
-                modifier = Modifier.padding(start = 16.dp)
+                modifier = Modifier.padding(start = 16.dp),
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
         Text(
             text = "24:15:05",
             modifier = Modifier.weight(1f),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "37 501",
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier.padding(end = 16.dp),
+                color = MaterialTheme.colorScheme.onBackground
             )
             Image(
                 painter = painterResource(id = R.drawable.unlike),
@@ -339,11 +340,4 @@ fun generateRandomDescription(): String {
 @Composable
 fun PreviewPodcastDetails() {
     PodcastDetails()
-}
-
-fun String.toFormattedDateString(): String {
-    val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    val outputDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-    val date = inputDateFormat.parse(this)
-    return outputDateFormat.format(date!!)
 }

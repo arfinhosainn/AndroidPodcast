@@ -40,7 +40,8 @@ fun PlayerHeader(
     play: () -> Unit,
     pause: () -> Unit,
     forward10: () -> Unit,
-    previous: () -> Unit
+    previous: () -> Unit,
+    title: String
 ) {
     Box {
         AsyncImage(
@@ -90,7 +91,7 @@ fun PlayerHeader(
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "About flow and our motivations",
+                            text = title,
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Medium,
@@ -150,6 +151,7 @@ fun PlayerHeader(
         pause = { /*TODO*/ },
         forward10 = { /*TODO*/ },
 
-        previous = { /*TODO*/ }
+        previous = { /*TODO*/ },
+        title = "This is a title"
     )
  }

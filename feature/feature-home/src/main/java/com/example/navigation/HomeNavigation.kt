@@ -10,6 +10,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.HomeScreen
 import com.example.HomeViewModel
+import com.example.PodcastDetailsViewModel
 import com.example.util.Screen
 
 fun NavGraphBuilder.homeRoute(

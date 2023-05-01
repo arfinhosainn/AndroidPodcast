@@ -27,5 +27,6 @@ fun MediaItem?.asPodcast() = EpisodeSong(
     title = this?.mediaMetadata?.title.toString().orEmpty(),
     image_url = this?.mediaMetadata?.artist.toString(),
     published_at = this?.mediaMetadata?.albumTitle.toString(),
-    download_url = ""
+    download_url = "",
+    duration = 0
 )
