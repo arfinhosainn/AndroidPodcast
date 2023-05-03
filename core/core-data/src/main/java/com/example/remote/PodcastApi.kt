@@ -2,6 +2,7 @@ package com.example.remote
 
 import com.example.mappers.Podcasts
 import com.example.mappers.Show
+import com.example.mappers.search.SearchDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -22,4 +23,12 @@ interface PodcastApi {
     suspend fun getRecentPodcast(
         @Query("limit") limit: Int = 20
     ): Show
+
+    @GET("search")
+    suspend fun getSearchedEpisodes(
+        @Query("limit") limit: Int = 10,
+        @Query("q") q: String,
+        @Query("type") type: String = "episodes",
+        ): SearchDto
+
 }

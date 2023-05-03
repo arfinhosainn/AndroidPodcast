@@ -39,15 +39,6 @@ class PodcastDetailsViewModel @Inject constructor(
         initialValue = DEFAULT_POSITION_MS
     )
 
-    fun playFirstPodcast(episodeSong: List<EpisodeSong>) {
-        viewModelScope.launch(Dispatchers.Main) {
-            musicServiceConnection.playSongs(
-                songs = episodeSong,
-                startIndex = 0 // play the first item in the list
-            )
-        }
-    }
-
 
     fun playPodcast(episodeSong: List<EpisodeSong>) {
         viewModelScope.launch(Dispatchers.Main) {

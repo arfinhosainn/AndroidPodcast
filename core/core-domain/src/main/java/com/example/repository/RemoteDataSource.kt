@@ -10,6 +10,6 @@ interface RemoteDataSource {
 
     fun getCuratedPodcastList(): Flow<Resource<List<PodcastList>>>
     fun getEpisodeForPodcast(showId: String): Flow<Resource<List<EpisodeSong>>>
-
     fun getRecentPodcasts(): Flow<Resource<List<Episode>>>
+    fun getSearchedEpisodes(query: String): Flow<Resource<List<Episode>>>
 }

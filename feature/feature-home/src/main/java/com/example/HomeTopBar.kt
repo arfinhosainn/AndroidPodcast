@@ -32,13 +32,6 @@ fun HomeTopBar(
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             }
-            IconButton(onClick = onMenuClick) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu Icon",
-                    tint = MaterialTheme.colorScheme.onSurface
-                )
-            }
         }
     )
 }

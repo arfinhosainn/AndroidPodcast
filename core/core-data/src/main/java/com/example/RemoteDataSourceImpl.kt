@@ -1,5 +1,6 @@
 package com.example
 
+import android.util.Log
 import com.example.remote.PodcastApi
 import com.example.mappers.Episode
 import com.example.mappers.toEpisodeSong
@@ -49,6 +50,20 @@ class RemoteDataSourceImpl @Inject constructor(
             emit(Resource.Loading())
             val response = api.getRecentPodcast()
             val episodes = response.response.items
+            emit(Resource.Success(episodes))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))
+        } catch (e: IOException) {
+            emit(Resource.Error("Could not reach server, Check your internet connection"))
+        }
+    }
+
+    override fun getSearchedEpisodes(query: String): Flow<Resource<List<Episode>>> = flow {
+        try {
+            emit(Resource.Loading())
+            val response = api.getSearchedEpisodes(q = query)
+            val episodes = response.response.items
+            Log.d("newPodcast", "getSearchedEpisodes: $episodes")
             emit(Resource.Success(episodes))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "An http exception occurred"))

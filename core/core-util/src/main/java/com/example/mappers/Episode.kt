@@ -1,5 +1,6 @@
 package com.example.mappers
 
+import com.example.mappers.search.Show
 import com.example.model.EpisodeSong
 
 data class Episode(
@@ -19,7 +20,8 @@ data class Episode(
     val stream_id: Any,
     val title: String,
     val type: String,
-    val waveform_url: String
+    val waveform_url: String,
+    val show: Show
 )
 
 fun Episode.toEpisodeSong(): EpisodeSong {

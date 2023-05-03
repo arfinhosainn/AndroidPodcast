@@ -138,6 +138,7 @@ dependencies {
 
     implementation(project(":feature:feature-home"))
     implementation(project(":feature:feature-player"))
+    implementation(project(":feature:feature-search"))
 
 
 }
