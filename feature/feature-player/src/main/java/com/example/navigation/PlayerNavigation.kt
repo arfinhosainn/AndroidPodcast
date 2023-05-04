@@ -6,6 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.FullScreenPlayer
 import com.example.PodcastDetailsViewModel
 import com.example.PodcastPlayerScreen
 import com.example.downloader.PodcastDownloader
@@ -44,5 +45,27 @@ fun NavGraphBuilder.detailRoute() {
             title = podcastState.currentPodcast.title
         )
     }
+}
 
+fun NavGraphBuilder.playerRoute() {
+    composable(route = Screen.PlayerScreen.route) {
+        val viewModel = hiltViewModel<PodcastDetailsViewModel>()
+        val currentSliderState by viewModel.currentPosition.collectAsStateWithLifecycle()
+        val podcastState by viewModel.musicState.collectAsStateWithLifecycle()
+        val detailsState by viewModel.detailState.collectAsStateWithLifecycle()
+        val context = LocalContext.current
+        val downloader = PodcastDownloader(context)
+
+        FullScreenPlayer(
+            trackImageUrl = podcastState.currentPodcast.image_original_url,
+            playWhenReady = podcastState.playWhenReady,
+            play = {
+                viewModel.resume()
+            },
+            pause = { /*TODO*/ },
+            forward10 = { /*TODO*/ },
+            previous = { /*TODO*/ },
+            title = podcastState.currentPodcast.title
+        )
+    }
 }

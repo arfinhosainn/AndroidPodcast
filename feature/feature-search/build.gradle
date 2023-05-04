@@ -57,10 +57,11 @@ dependencies {
     implementation libs.runtime.compose
     implementation libs.junit
     implementation libs.junit.ext
+    implementation libs.systemui.controller
 
 
     implementation(project(":core:core-util"))
     implementation(project(":core:core-domain"))
     implementation(project(":core:core-ui"))
-    implementation(project(":feature:feature-home"))
+    implementation(project(":feature:feature-player"))
 }

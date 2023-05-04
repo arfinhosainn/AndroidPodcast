@@ -58,11 +58,11 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getSearchedEpisodes(query: String): Flow<Resource<List<Episode>>> = flow {
+    override fun getSearchedEpisodes(query: String): Flow<Resource<List<EpisodeSong>>> = flow {
         try {
             emit(Resource.Loading())
             val response = api.getSearchedEpisodes(q = query)
-            val episodes = response.response.items
+            val episodes = response.response.items.map { it.toEpisodeSong() }
             Log.d("newPodcast", "getSearchedEpisodes: $episodes")
             emit(Resource.Success(episodes))
         } catch (e: HttpException) {
