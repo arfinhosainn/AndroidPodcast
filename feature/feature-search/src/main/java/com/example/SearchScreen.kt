@@ -13,10 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Button
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,9 +22,7 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -35,13 +30,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.model.EpisodeSong
 import com.example.ui.theme.lightSurface
-import com.example.util.TransparentSystemBars
 import com.example.util.toFormattedDuration
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,8 +56,7 @@ fun SearchScreen(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 50.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -79,7 +72,7 @@ fun SearchScreen(
                 },
                 active = active,
                 onActiveChange = { active = it },
-                placeholder = { Text("Hinted search text") },
+                placeholder = { Text("Search Episodes") },
                 trailingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 colors = SearchBarDefaults.colors(
                     containerColor = lightSurface,
@@ -116,8 +109,6 @@ fun SearchScreen(
                 }
             }
         }
-
-
     }
 
 }

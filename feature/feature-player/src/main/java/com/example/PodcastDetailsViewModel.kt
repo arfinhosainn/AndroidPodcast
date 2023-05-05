@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
 @HiltViewModel
 class PodcastDetailsViewModel @Inject constructor(
     private val repository: RemoteDataSource,
@@ -33,7 +34,7 @@ class PodcastDetailsViewModel @Inject constructor(
     }
 
     val musicState = musicServiceConnection.musicState
-    var  currentPosition = musicServiceConnection.currentPosition.stateIn(
+    var currentPosition = musicServiceConnection.currentPosition.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
         initialValue = DEFAULT_POSITION_MS
@@ -53,13 +54,23 @@ class PodcastDetailsViewModel @Inject constructor(
     fun resume() = musicServiceConnection.play()
     fun pause() = musicServiceConnection.pause()
     fun skipNext() = musicServiceConnection.skipNext()
-    private var currentPositions = 0L // Initialize the current position to 0
+    private var currentPositions = 0L
 
     fun seekTo10Seconds() {
         val totalDuration = musicState.value.duration
-        currentPositions += (totalDuration * 0.1).toLong() // Increment the current position by 10% of the total duration
+        currentPositions += (totalDuration * 0.01).toLong()
         musicServiceConnection.seekTo10Seconds(currentPositions)
     }
+    fun seekBackwards10Seconds() {
+        val totalDuration = musicState.value.duration
+        currentPositions -= (totalDuration / 0.01).toLong()
+        musicServiceConnection.seekTo10Seconds(currentPositions)
+    }
+
+
+
+
+
     fun skipTo(position: Float) =
         musicServiceConnection.skipTo(convertToPosition(position, musicState.value.duration))
 
@@ -73,9 +84,11 @@ class PodcastDetailsViewModel @Inject constructor(
                                 error = result.message ?: "An unexpected error occurred"
                             )
                     }
+
                     is Resource.Loading -> {
                         detailState.value = DetailScreenState(isLoading = true)
                     }
+
                     is Resource.Success -> {
                         withContext(Dispatchers.IO) {
                             detailState.value = DetailScreenState(

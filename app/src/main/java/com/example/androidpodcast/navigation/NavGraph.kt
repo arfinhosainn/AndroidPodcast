@@ -17,6 +17,8 @@ fun SetupNavGraph(
         homeRoute(navController)
         detailRoute()
         searchRoute(navController)
-        playerRoute()
+        playerRoute(onBackPressed = {
+            navController.navigate(Screen.SearchScreen.route)
+        })
     }
 }

@@ -47,7 +47,9 @@ fun NavGraphBuilder.detailRoute() {
     }
 }
 
-fun NavGraphBuilder.playerRoute() {
+fun NavGraphBuilder.playerRoute(
+    onBackPressed: () -> Unit
+) {
     composable(route = Screen.PlayerScreen.route) {
         val viewModel = hiltViewModel<PodcastDetailsViewModel>()
         val currentSliderState by viewModel.currentPosition.collectAsStateWithLifecycle()
@@ -62,10 +64,15 @@ fun NavGraphBuilder.playerRoute() {
             play = {
                 viewModel.resume()
             },
-            pause = { /*TODO*/ },
-            forward10 = { /*TODO*/ },
-            previous = { /*TODO*/ },
-            title = podcastState.currentPodcast.title
+            pause = {
+                viewModel.pause()
+            },
+            forward10 = viewModel::seekTo10Seconds,
+            previous = viewModel::seekBackwards10Seconds,
+            currentPosition = currentSliderState,
+            duration = podcastState.duration,
+            onSkipTo = viewModel::skipTo,
+            onBackPressed = onBackPressed
         )
     }
 }
