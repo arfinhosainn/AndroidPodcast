@@ -14,3 +14,11 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Android Podcast"
 include ':app'
+include ':core:core-ui'
+include ':core:core-util'
+include ':feature:feature-home'
+include ':core:core-domain'
+include ':core:core-data'
+include ':core:core-media'
+include ':feature:feature-player'
+include ':feature:feature-search'

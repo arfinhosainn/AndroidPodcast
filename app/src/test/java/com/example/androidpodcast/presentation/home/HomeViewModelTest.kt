@@ -1,9 +1,10 @@
 package com.example.androidpodcast.presentation.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.androidpodcast.data.remote.mappers.Episode
-import com.example.androidpodcast.data.remote.repository.RemoteDataSourceImpl
-import com.example.androidpodcast.util.Resource
+import com.example.HomeViewModel
+import com.example.RemoteDataSourceImpl
+import com.example.mappers.Episode
+import com.example.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf

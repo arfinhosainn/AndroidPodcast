@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android Podcast</string>
+    <string name="logo">Logo</string>
+    <string name="repeat">Repeat</string>
+    <string name="repeat_one">Repeat One</string>
+    <string name="play">Play</string>
+    <string name="skip_next">Skip Next</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="skip_previous">Skip Previous</string>
+    <string name="music_notification_channel_name">Notification Channel</string>
+    <string name="player_timestamp_format" translatable="false">%1$s:%2$s</string>
+</resources>
