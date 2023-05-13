@@ -45,6 +45,9 @@ dependencies {
     implementation libs.junit
     implementation libs.junit.ext
 
+    implementation libs.paging.compose
+    implementation libs.paging.runtime
+
     implementation(project(":core:core-util"))
 
 

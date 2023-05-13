@@ -17,24 +17,10 @@ data class Episode(
     val published_at: String,
     val show_id: Int,
     val site_url: String,
-    val stream_id: Any,
+    val stream_id: String,
     val title: String,
     val type: String,
-    val waveform_url: String,
-    val show: Show
+    val waveform_url: String
 )
 
-fun Episode.toEpisodeSong(): EpisodeSong {
-    return EpisodeSong(
-        episode_id = episode_id,
-        author_id = author_id,
-        playback_url = playback_url,
-        show_id = show_id,
-        image_url = image_url,
-        title = title,
-        image_original_url = image_original_url,
-        published_at = published_at,
-        download_url = download_url,
-        duration = duration
-    )
-}
+

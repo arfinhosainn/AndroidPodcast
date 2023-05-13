@@ -16,7 +16,9 @@ interface PodcastApi {
 
     @GET("shows/{showId}/episodes")
     suspend fun getEpisodeForPodcast(
-        @Path("showId") showId: String
+        @Path("showId") showId: String,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
     ): Show
 
     @GET("tags/android+development/episodes")

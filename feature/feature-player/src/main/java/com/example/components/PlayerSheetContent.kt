@@ -41,7 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.feature_player.R
-import com.example.model.EpisodeSong
+import com.example.mappers.Episode
 import com.example.ui.theme.lightBlue
 import com.example.util.toFormattedDateString
 
@@ -89,8 +89,8 @@ fun PodcastContent(
 
 @Composable
 fun PodcastListScreen(
-    onEpisodeSelected: (EpisodeSong) -> Unit,
-    episodeSong: EpisodeSong,
+    onEpisodeSelected: (Episode) -> Unit,
+    episodeSong: Episode,
     onDownLoadClick: (String) -> Unit
 ) {
     Box(
@@ -113,9 +113,9 @@ fun PodcastListScreen(
 
 @Composable
 fun PodcastEpisodeList(
-    onClick: (EpisodeSong) -> Unit,
+    onClick: (Episode) -> Unit,
     onDownLoadClick: (String) -> Unit,
-    episodeSong: EpisodeSong
+    episodeSong: Episode
 ) {
     Surface(
         modifier = Modifier

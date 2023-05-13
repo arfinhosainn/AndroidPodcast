@@ -43,6 +43,9 @@ dependencies {
     implementation libs.retrofit.converter
     implementation libs.junit
     implementation libs.junit.ext
+    kapt libs.room.compiler
+    implementation libs.room.ktx
+    implementation libs.room.paging
 
 
     implementation(project(":core:core-util"))

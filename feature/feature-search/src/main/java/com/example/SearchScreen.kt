@@ -42,7 +42,7 @@ import com.example.util.toFormattedDuration
 fun SearchScreen(
     onTextChange: (String) -> Unit,
     searchState: SearchState,
-    onPodcastClick:(EpisodeSong) ->Unit
+    onPodcastClick: (EpisodeSong) -> Unit
 ) {
 
     var text by rememberSaveable { mutableStateOf("") }
@@ -77,7 +77,7 @@ fun SearchScreen(
                 colors = SearchBarDefaults.colors(
                     containerColor = lightSurface,
 
-                )
+                    )
             ) {
                 LazyColumn(
                     modifier = Modifier
@@ -88,7 +88,12 @@ fun SearchScreen(
                     items(searchState.episode) { episodes ->
 
                         ListItem(
-                            headlineContent = { Text(episodes.title) },
+                            headlineContent = {
+                                Text(
+                                    episodes.title,
+                                    color = MaterialTheme.colorScheme.inverseSurface
+                                )
+                            },
                             supportingContent = { Text(episodes.duration.toFormattedDuration()) },
                             leadingContent = {
                                 AsyncImage(

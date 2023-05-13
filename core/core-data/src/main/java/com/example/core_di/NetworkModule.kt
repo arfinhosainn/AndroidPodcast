@@ -1,12 +1,16 @@
 package com.example.core_di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.RemoteDataSourceImpl
+import com.example.local.PodcastDatabase
 import com.example.remote.ApiKeyInterceptor
 import com.example.remote.PodcastApi
 import com.example.repository.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,8 +31,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providesRemoteDataSource(api: PodcastApi): RemoteDataSource {
-        return RemoteDataSourceImpl(api)
+    fun providesRemoteDataSource(api: PodcastApi, db: PodcastDatabase): RemoteDataSource {
+        return RemoteDataSourceImpl(api, db)
     }
 
     @Singleton
@@ -46,6 +50,18 @@ object NetworkModule {
         okHttpClient: OkHttpClient
     ): PodcastApi {
         return retrofitBuilder.client(okHttpClient).build().create(PodcastApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(
+        @ApplicationContext context: Context
+    ): PodcastDatabase {
+        return Room.databaseBuilder(
+            context,
+            PodcastDatabase::class.java,
+            "podcast_database"
+        ).build()
     }
 
 

@@ -47,8 +47,10 @@ dependencies {
     implementation libs.material3.compose
     implementation libs.navigation.compose
     implementation libs.compose.tooling.preview
+    implementation libs.paging.compose
+    implementation libs.paging.runtime
 
-    kapt libs.hilt.compiler
+    annotationProcessor libs.hilt.compiler
     implementation libs.hilt.android
     implementation libs.coroutines.core
     implementation libs.coil
@@ -59,15 +61,11 @@ dependencies {
     implementation libs.junit.ext
 
 
-
-
     implementation(project(":core:core-util"))
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-media"))
     implementation(project(":core:core-domain"))
     implementation(project(":core:core-data"))
-
-
 
 
 }
