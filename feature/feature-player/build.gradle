@@ -50,7 +50,7 @@ dependencies {
     implementation libs.paging.compose
     implementation libs.paging.runtime
 
-    annotationProcessor libs.hilt.compiler
+    kapt libs.hilt.compiler
     implementation libs.hilt.android
     implementation libs.coroutines.core
     implementation libs.coil

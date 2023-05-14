@@ -45,7 +45,7 @@ class RemoteDataSourceImpl @Inject constructor(
     override fun getEpisodeForPodcast(showId: String): Flow<PagingData<EpisodeEntity>> {
         val pagingSourceFactory = { db.dao.pagingSource() }
         return Pager(
-            config = PagingConfig(pageSize = 5),
+            config = PagingConfig(pageSize = 3),
             remoteMediator =
             PodcastRemoteMediator(
                 podcastDb = db,

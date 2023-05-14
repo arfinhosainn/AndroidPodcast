@@ -53,7 +53,7 @@ dependencies {
     implementation libs.junit
     implementation libs.junit.ext
 
-    implementation libs.room.compiler
+    kapt libs.room.compiler
     implementation libs.room.ktx
     implementation libs.room.paging
 

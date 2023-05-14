@@ -3,7 +3,6 @@ package com.example
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
@@ -11,7 +10,6 @@ import com.example.common.Constants.DEFAULT_POSITION_MS
 import com.example.exoplayer.PodcastServiceConnection
 import com.example.mappers.Episode
 import com.example.mappers.toEpisode
-import com.example.model.EpisodeEntity
 import com.example.model.EpisodeSong
 import com.example.repository.RemoteDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject

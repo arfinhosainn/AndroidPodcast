@@ -1,13 +1,16 @@
-package com.example.mappers
+package com.example.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.mappers.search.Show
-import com.example.model.EpisodeSong
 
-data class Episode(
+@Entity
+data class EpisodeEntity(
     val author_id: Int,
     val download_enabled: Boolean,
     val download_url: String,
     val duration: Int,
+    @PrimaryKey
     val episode_id: Int,
     val explicit: Boolean,
     val image_original_url: String,
@@ -21,5 +24,4 @@ data class Episode(
     val type: String,
     val waveform_url: String
 )
-
 
